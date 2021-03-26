@@ -3,5 +3,5 @@
 const { configure } = require('japa')
 
 configure({
-  files: ['test/**/*.js']
+  files: ['test/**/*.spec.js']
 })

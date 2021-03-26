@@ -151,7 +151,7 @@ test.group('Multipart', () => {
       .get('/')
       .attach('package', path.join(__dirname, '../../package.json'))
       .expect(200)
-  }).timeout(0)
+  }).timeout(6000)
 
   test('throw exception when try to move file multiple times to the tmp directory', async (assert) => {
     const server = http.createServer((req, res) => {
@@ -178,7 +178,7 @@ test.group('Multipart', () => {
       .expect(500)
 
     assert.equal(text, 'E_CANNOT_MOVE: Cannot move file package for multiple times')
-  }).timeout(0)
+  }).timeout(6000)
 
   test('throw error when processing files for multiple times', async (assert) => {
     const server = http.createServer((req, res) => {
@@ -203,7 +203,7 @@ test.group('Multipart', () => {
       .expect(500)
 
     assert.match(res.text, /E_CANNOT_PROCESS_STREAM: Cannot process multipart stream twice. Make sure to disable files {autoProcess} when manually calling multipart\.process/)
-  }).timeout(0)
+  }).timeout(6000)
 
   test('move file from tmp directory', async (assert) => {
     const server = http.createServer((req, res) => {
@@ -233,7 +233,7 @@ test.group('Multipart', () => {
       .get('/')
       .attach('package', path.join(__dirname, '../../package.json'))
       .expect(200)
-  }).timeout(0)
+  }).timeout(6000)
 
   test('move file from tmp directory with different name', async (assert) => {
     const server = http.createServer((req, res) => {
@@ -265,7 +265,7 @@ test.group('Multipart', () => {
       .get('/')
       .attach('package', path.join(__dirname, '../../package.json'))
       .expect(200)
-  }).timeout(0)
+  }).timeout(6000)
 
   test('throw exception when tmp file does not exists', async (assert) => {
     const server = http.createServer((req, res) => {
@@ -293,7 +293,7 @@ test.group('Multipart', () => {
       .expect(500)
 
     assert.equal(text, 'E_CANNOT_MOVE: Cannot move file package since there is no tmp file and stream is already consumed')
-  }).timeout(0)
+  }).timeout(6000)
 
   test('validate file size before moving', async (assert) => {
     const server = http.createServer((req, res) => {
@@ -332,7 +332,7 @@ test.group('Multipart', () => {
       type: 'size',
       message: 'File size should be less than 10B'
     })
-  }).timeout(0)
+  }).timeout(6000)
 
   test('validate file types before moving', async (assert) => {
     const server = http.createServer((req, res) => {
@@ -371,7 +371,7 @@ test.group('Multipart', () => {
       type: 'type',
       message: 'Invalid file type json or application. Only jpg, png are allowed'
     })
-  }).timeout(0)
+  }).timeout(6000)
 
   test('validate file extensions before moving', async (assert) => {
     const server = http.createServer((req, res) => {
@@ -490,7 +490,7 @@ test.group('Multipart', () => {
       type: 'size',
       message: 'Max size execedded'
     })
-  }).timeout(0)
+  }).timeout(6000)
 
   test('set validation options at a later stage', async (assert) => {
     const server = http.createServer((req, res) => {
@@ -528,7 +528,7 @@ test.group('Multipart', () => {
       type: 'size',
       message: 'File size should be less than 10B'
     })
-  }).timeout(0)
+  }).timeout(6000)
 
   test('move file if validation passes', async (assert) => {
     const server = http.createServer((req, res) => {
@@ -563,7 +563,7 @@ test.group('Multipart', () => {
       .get('/')
       .attach('package', path.join(__dirname, '../../package.json'))
       .expect(200)
-  }).timeout(0)
+  }).timeout(6000)
 
   test('move file directly without moving it to tmp folder', async (assert) => {
     const server = http.createServer((req, res) => {
@@ -594,7 +594,7 @@ test.group('Multipart', () => {
       .get('/')
       .attach('package', path.join(__dirname, '../../package.json'))
       .expect(200)
-  }).timeout(0)
+  }).timeout(6000)
 
   test('limit file size when moving directly', async (assert) => {
     const server = http.createServer((req, res) => {
@@ -633,7 +633,7 @@ test.group('Multipart', () => {
       type: 'size',
       message: 'File size should be less than 10B'
     })
-  }).timeout(0)
+  }).timeout(6000)
 
   test('limit file extensions when moving directly', async (assert) => {
     const server = http.createServer((req, res) => {
@@ -672,7 +672,7 @@ test.group('Multipart', () => {
       type: 'type',
       message: 'Invalid file type json or application. Only jpg is allowed'
     })
-  }).timeout(0)
+  }).timeout(6000)
 
   test('return false from movedAll when any of the file failed from moving', async (assert) => {
     const server = http.createServer((req, res) => {
@@ -709,7 +709,7 @@ test.group('Multipart', () => {
       .attach('license', path.join(__dirname, '../../LICENSE.md'))
       .expect(200)
     assert.equal(text, 'false')
-  }).timeout(0)
+  }).timeout(6000)
 
   test('return true from movedAll when all of the files have been moved', async (assert) => {
     const server = http.createServer((req, res) => {
@@ -752,7 +752,7 @@ test.group('Multipart', () => {
       .attach('license', path.join(__dirname, '../../LICENSE.md'))
       .expect(200)
     assert.equal(text, 'true')
-  }).timeout(0)
+  }).timeout(6000)
 
   test('return an array of files sucessfully moved', async (assert) => {
     const server = http.createServer((req, res) => {
@@ -794,7 +794,7 @@ test.group('Multipart', () => {
     assert.equal(body[0].fileName, 'package.json')
     assert.isAbove(body[0].size, 0)
     assert.deepEqual(body[0].error, {})
-  }).timeout(0)
+  }).timeout(6000)
 
   test('return all files', async (assert) => {
     const server = http.createServer((req, res) => {
@@ -845,7 +845,7 @@ test.group('Multipart', () => {
     assert.equal(body[1].status, 'error')
     assert.equal(body[1].size, 0)
     assert.equal(body[1].error.type, 'type')
-  }).timeout(0)
+  }).timeout(6000)
 
   test('return an array of errors', async (assert) => {
     const server = http.createServer((req, res) => {
@@ -888,7 +888,7 @@ test.group('Multipart', () => {
       type: 'type',
       message: 'Invalid file type markdown or text. Only json is allowed'
     }])
-  }).timeout(0)
+  }).timeout(6000)
 
   test('throw exception when no callback is passed to multipart.file', async (assert) => {
     const multipart = new Multipart({ request: {} })
