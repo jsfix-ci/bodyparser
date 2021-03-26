@@ -585,7 +585,7 @@ test.group('Body Parser', (group) => {
     await browser.visit(TEST_URL)
     await browser.pressButton('Submit')
 
-    assert.deepEqual(JSON.parse(browser.text()), { items: { '1': 'foo', '2': 'bar' } })
+    assert.deepEqual(JSON.parse(browser.text()), { items: { 1: 'foo', 2: 'bar' } })
   })
 
   test('set raw body along with json body', async (assert) => {
