@@ -1,3 +1,4 @@
+import { fileTypeFromBuffer } from 'file-type';
 /*
  * @adonisjs/bodyparser
  *
@@ -10,7 +11,6 @@
 /// <reference path="../adonis-typings/bodyparser.ts" />
 
 import { extname } from 'path'
-import { fromBuffer } from 'file-type'
 import mediaTyper from 'media-typer'
 
 /**
@@ -176,7 +176,7 @@ export async function getFileType(
   /**
    * Attempt to detect file type from it's content
    */
-  const magicType = await fromBuffer(fileContents)
+  const magicType = await fileTypeFromBuffer(fileContents)
   if (magicType) {
     return Object.assign({ ext: magicType.ext }, parseMimeType(magicType.mime))
   }
